@@ -1,4 +1,4 @@
-import Image from "next/image";
+"use client";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -18,12 +18,10 @@ import {
   Code, // For Software Engineers
   Server, // For DevOps Engineers
   Bot, // For Machine Learning Engineers
-  FlaskConical,
   Database,
   Microscope,
   DatabaseZap,
   ChartNoAxesCombined,
-  FileScan,
   BrainCircuit,
   Brain,
   CircleDollarSign,
@@ -32,10 +30,68 @@ import {
   School,
   Cpu,
 } from "lucide-react";
+import {
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaLinkedin,
+} from "react-icons/fa";
+import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevData: any) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const sendEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.info("Sending...");
+
+    try {
+      await emailjs.send(
+        "service_q3d7muj",
+        "template_bt6545b",
+        {
+          user_name: `${formData.firstName} ${formData.lastName}`,
+          user_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        "FeWbmuONxlqxKTvZw"
+      );
+      toast.success("Email sent successfully!");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      toast.error("Failed to send email.");
+      console.error("Email send error:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -786,10 +842,14 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Contact Us Section */}
       <section className="py-20 bg-white" id="contact">
-        <div className="container">
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+        />
+        <div className="container mx-auto px-4">
+          {/* Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4 text-secondary">
               Contact Us
@@ -800,168 +860,159 @@ export default function Home() {
             </p>
           </div>
 
+          {/* Form & Info Section */}
           <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div className="space-y-8">
-              <div className="bg-white p-8 rounded-xl border border-accent shadow-sm">
-                <h3 className="text-xl font-bold mb-6 text-secondary">
-                  Send Us a Message
-                </h3>
-                <form className="space-y-4">
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="name"
-                        className="text-sm font-medium text-secondary"
-                      >
-                        Full Name
-                      </label>
-                      <input
-                        id="name"
-                        type="text"
-                        placeholder="John Doe"
-                        className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="email"
-                        className="text-sm font-medium text-secondary"
-                      >
-                        Email Address
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        placeholder="john@example.com"
-                        className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      />
-                    </div>
-                  </div>
+            {/* Contact Form */}
+            <div className="bg-white p-8 rounded-xl border border-accent shadow-sm space-y-8">
+              <h3 className="text-xl font-bold text-secondary">
+                Send Us a Message
+              </h3>
+              <form onSubmit={sendEmail} className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <label
-                      htmlFor="subject"
-                      className="text-sm font-medium text-secondary"
-                    >
-                      Subject
+                    <label className="text-sm font-medium text-secondary">
+                      First Name
                     </label>
                     <input
-                      id="subject"
                       type="text"
-                      placeholder="How can we help you?"
+                      name="firstName"
+                      placeholder="First"
+                      value={formData.firstName}
+                      onChange={handleChange}
                       className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                      required
                     />
                   </div>
                   <div className="space-y-2">
-                    <label
-                      htmlFor="message"
-                      className="text-sm font-medium text-secondary"
-                    >
-                      Message
+                    <label className="text-sm font-medium text-secondary">
+                      Last Name
                     </label>
-                    <textarea
-                      id="message"
-                      rows={4}
-                      placeholder="Tell us about your project or inquiry..."
+                    <input
+                      type="text"
+                      name="lastName"
+                      placeholder="Last"
+                      value={formData.lastName}
+                      onChange={handleChange}
                       className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                      required
                     />
                   </div>
-                  <Button className="w-full bg-primary hover:bg-primary/90">
-                    Send Message
-                  </Button>
-                </form>
-              </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-secondary">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="your@email.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-secondary">
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-secondary">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    placeholder="Tell us about your project or inquiry..."
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-md"
+                >
+                  Send Message
+                </button>
+              </form>
             </div>
 
+            {/* Contact Info */}
             <div className="space-y-8">
-              <div className="bg-white p-8 rounded-xl border border-accent shadow-sm">
-                <h3 className="text-xl font-bold mb-6 text-secondary">
+              <div className="bg-white p-8 rounded-xl border border-accent shadow-sm space-y-6">
+                <h3 className="text-xl font-bold text-secondary mb-6">
                   Contact Information
                 </h3>
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-primary"
-                      >
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-secondary">Phone</h4>
-                      <p className="text-secondary/70">+1 (555) 123-4567</p>
-                      <p className="text-secondary/70">Mon-Fri, 9am-6pm EST</p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-primary"
-                      >
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-secondary">Email</h4>
-                      <p className="text-secondary/70">
-                        hello@veritasanalytics.com
-                      </p>
-                      <p className="text-secondary/70">
-                        support@veritasanalytics.com
-                      </p>
-                    </div>
+                {/* Phone */}
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <FaPhoneAlt className="text-primary" size={20} />
                   </div>
+                  <div>
+                    <h4 className="font-medium text-secondary">Phone</h4>
+                    <p className="text-secondary/70">250-888-552-183</p>
+                  </div>
+                </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-primary"
-                      >
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-secondary">Office</h4>
-                      <p className="text-secondary/70">
-                        123 Business Ave, Suite 100
-                      </p>
-                      <p className="text-secondary/70">
-                        San Francisco, CA 94107
-                      </p>
-                    </div>
+                {/* Email */}
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <FaEnvelope className="text-primary" size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-secondary">Email</h4>
+                    <p className="text-secondary/70">sales@vac.rw</p>
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <FaMapMarkerAlt className="text-primary" size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-secondary">Office</h4>
+                    <p className="text-secondary/70">
+                      KN 7 Ave, Kigali, Rwanda
+                    </p>
+                  </div>
+                </div>
+
+                {/* LinkedIn */}
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <FaLinkedin className="text-primary" size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-secondary">LinkedIn</h4>
+                    <a
+                      href="https://www.linkedin.com/in/your-profile"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-secondary/70 hover:underline"
+                    >
+                      Visit Profile
+                    </a>
                   </div>
                 </div>
               </div>
-
               <div className="bg-white p-8 rounded-xl border border-accent shadow-sm">
                 <h3 className="text-xl font-bold mb-6 text-secondary">
                   Office Hours
@@ -973,45 +1024,13 @@ export default function Home() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-secondary">Saturday</span>
-                    <span className="text-secondary/70">
-                      10:00 AM - 2:00 PM
-                    </span>
+                    <span className="text-secondary/70">Closed</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-secondary">Sunday</span>
-                    <span className="text-secondary/70">Closed</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative h-[250px] rounded-xl overflow-hidden border border-accent">
-                <div className="absolute inset-0 bg-accent/10">
-                  <div className="h-full w-full flex items-center justify-center">
-                    <div className="text-center p-4">
-                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="text-primary"
-                        >
-                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                      </div>
-                      <p className="text-secondary font-medium">
-                        Interactive Map
-                      </p>
-                      <p className="text-secondary/70 text-sm">
-                        Map loading placeholder
-                      </p>
-                    </div>
+                    <span className="text-secondary/70">
+                      10:00 AM - 2:00 PM
+                    </span>
                   </div>
                 </div>
               </div>
