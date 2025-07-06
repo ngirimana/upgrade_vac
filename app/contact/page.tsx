@@ -261,62 +261,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="container py-20" id="services">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4 text-secondary">
-            What We Offer in Data Analytics
-          </h2>
-          <p className="text-secondary/70 max-w-2xl mx-auto">
-            Discover our range of analytics services tailored to help you
-            harness the full power of your business data.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Data Strategy */}
-          <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-              <BarChart2 className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="text-xl font-bold mb-2 text-secondary group-hover:text-[#FF8C4B] transition-colors">
-              Data Strategy Development
-            </h3>
-            <p className="text-secondary/70">
-              We offer solutions for efficiently planning and implementing a
-              customized data strategy that meets your business goals.
-            </p>
-          </div>
-
-          {/* Tool Advisory */}
-          <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-              <BarChart2 className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="text-xl font-bold mb-2 text-secondary group-hover:text-[#FF8C4B] transition-colors">
-              Analysis Tools Advisory
-            </h3>
-            <p className="text-secondary/70">
-              We help you identify and implement the most effective tools and
-              analytical approaches suited to your business and decision-making
-              needs.
-            </p>
-          </div>
-
-          {/* Technical and Business Expertise */}
-          <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-              <BarChart2 className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="text-xl font-bold mb-2 text-secondary group-hover:text-[#FF8C4B] transition-colors">
-              Technical & Business Expertise
-            </h3>
-            <p className="text-secondary/70">
-              Our experts master both technical and business aspects to deliver
-              precise analysis and valuable insights.
-            </p>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
