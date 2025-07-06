@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowRight, Bot, Globe } from "lucide-react";
+import { ArrowRight, Bot } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import aiImage from "@/public/ai.png";
+
 // Adjust the path as necessary
 export default function AiMachineLearningPage() {
   return (

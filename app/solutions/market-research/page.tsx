@@ -1,7 +1,6 @@
 "use client";
 
-import { ArrowRight, Search, Globe } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import marketImage from "@/public/market-research.png"; // Add your own image

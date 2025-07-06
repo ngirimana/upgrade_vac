@@ -1,7 +1,6 @@
 "use client";
 
-import { ArrowRight, Bot, Globe } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, Bot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import DataScienceImage from "@/public/data-science.png"; // Update this path to your actual image

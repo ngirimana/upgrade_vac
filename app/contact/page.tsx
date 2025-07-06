@@ -1,6 +1,5 @@
 "use client";
-import Link from "next/link";
-import { BarChart2, Globe } from "lucide-react";
+
 import {
   FaMapMarkerAlt,
   FaPhoneAlt,
@@ -11,7 +10,6 @@ import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export default function Home() {
