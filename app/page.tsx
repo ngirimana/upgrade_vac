@@ -6,9 +6,6 @@ import {
   Globe,
   LineChart,
   Users,
-  Linkedin,
-  Twitter,
-  Mail,
   Phone,
   Banknote,
   Factory,
@@ -23,151 +20,18 @@ import {
   DatabaseZap,
   ChartNoAxesCombined,
   BrainCircuit,
-  Brain,
   CircleDollarSign,
   Rss,
   ChartSpline,
   School,
   Cpu,
 } from "lucide-react";
-import {
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaLinkedin,
-} from "react-icons/fa";
-import emailjs from "@emailjs/browser";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
-export default function Home() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevData: any) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const sendEmail = async (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.info("Sending...");
-
-    try {
-      await emailjs.send(
-        "service_q3d7muj",
-        "template_bt6545b",
-        {
-          user_name: `${formData.firstName} ${formData.lastName}`,
-          user_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        },
-        "FeWbmuONxlqxKTvZw"
-      );
-      toast.success("Email sent successfully!");
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
-    } catch (error) {
-      toast.error("Failed to send email.");
-      console.error("Email send error:", error);
-    }
-  };
-
+export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <header className="sticky top-0 z-40 w-full border-b bg-white/80 backdrop-blur-sm">
-        <div className="container flex h-20 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img
-              src="/logo.png" // Update this path to your actual logo image
-              alt="Veritas Analytics Logo"
-              className="h-16 w-16 rounded-full" // Adjust size as needed
-            />
-            <span className="text-xl font-bold text-secondary">
-              Veritas Analytics
-            </span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link
-              href="#"
-              className="text-sm font-medium text-secondary hover:text-primary"
-            >
-              Home
-            </Link>
-            <Link
-              href="#services"
-              className="text-sm font-medium text-secondary hover:text-primary"
-            >
-              Services
-            </Link>
-            <Link
-              href="#solutions"
-              className="text-sm font-medium text-secondary hover:text-primary"
-            >
-              Solutions
-            </Link>
-            <Link
-              href="#team"
-              className="text-sm font-medium text-secondary hover:text-primary"
-            >
-              Our Team
-            </Link>
-            <Link
-              href="#contact"
-              className="text-sm font-medium text-secondary hover:text-primary"
-            >
-              Contact
-            </Link>
-          </nav>
-          <Button className="hidden md:inline-flex bg-secondary hover:bg-secondary/90">
-            Book a Consultation
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="md:hidden border-secondary text-secondary"
-          >
-            <span className="sr-only">Toggle menu</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-6 w-6"
-            >
-              <line x1="4" x2="20" y1="12" y2="12" />
-              <line x1="4" x2="20" y1="6" y2="6" />
-              <line x1="4" x2="20" y1="18" y2="18" />
-            </svg>
-          </Button>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section className="relative bg-primary/10">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 z-0" />
@@ -311,7 +175,7 @@ export default function Home() {
               analytics solutions.
             </p>
             <Link
-              href="#"
+              href="/services/data-analytics"
               className="text-primary font-medium inline-flex items-center gap-1 hover:underline"
             >
               Learn more <ArrowRight className="h-4 w-4" />
@@ -330,7 +194,7 @@ export default function Home() {
               intelligence platforms.
             </p>
             <Link
-              href="#"
+              href="/services/business-intelligence"
               className="text-primary font-medium inline-flex items-center gap-1 hover:underline"
             >
               Learn more <ArrowRight className="h-4 w-4" />
@@ -349,7 +213,7 @@ export default function Home() {
               and opportunities.
             </p>
             <Link
-              href="#"
+              href="/services/strategic-consulting"
               className="text-primary font-medium inline-flex items-center gap-1 hover:underline"
             >
               Learn more <ArrowRight className="h-4 w-4" />
@@ -536,161 +400,174 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Data Engineering */}
             <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-              <div className="flex justify-center mb-6">
-                <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <DatabaseZap className="h-8 w-8 text-primary" />
+              <Link href="/solutions/data-engineering">
+                <div className="flex justify-center mb-6">
+                  <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <DatabaseZap className="h-8 w-8 text-primary" />
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
-                Data Engineering
-              </h3>
-              <p className="text-secondary/70 mb-6 text-center">
-                We can help you use your data, like your customers' purchases,
-                email subscribers, and social media followers, to drive your
-                objectives and reach your goals.
-              </p>
-              <div className="border-t border-accent/30 pt-4">
-                <h4 className="font-medium text-secondary mb-2">
-                  Products and Services Include:
-                </h4>
-                <p className="text-secondary/70 text-sm">
-                  Data and Infrastructure Audits, Data Warehouse and Data Lake
-                  Development, Data Enrichment
+                <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
+                  Data Engineering
+                </h3>
+                <p className="text-secondary/70 mb-6 text-center">
+                  We can help you use your data, like your customers' purchases,
+                  email subscribers, and social media followers, to drive your
+                  objectives and reach your goals.
                 </p>
-              </div>
+                <div className="border-t border-accent/30 pt-4">
+                  <h4 className="font-medium text-secondary mb-2">
+                    Products and Services Include:
+                  </h4>
+                  <p className="text-secondary/70 text-sm">
+                    Data and Infrastructure Audits, Data Warehouse and Data Lake
+                    Development, Data Enrichment
+                  </p>
+                </div>
+              </Link>
             </div>
 
             {/* Data Science */}
             <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-              <div className="flex justify-center mb-6">
-                <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <ChartNoAxesCombined className="h-8 w-8 text-primary" />
+              <Link href="/solutions/data-science">
+                <div className="flex justify-center mb-6">
+                  <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <ChartNoAxesCombined className="h-8 w-8 text-primary" />
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
-                Data Science
-              </h3>
-              <p className="text-secondary/70 mb-6 text-center">
-                Our team can help you find insightful patterns in your data—and
-                leverage them for better outcomes for you, your supporters, and
-                your customers.
-              </p>
-              <div className="border-t border-accent/30 pt-4">
-                <h4 className="font-medium text-secondary mb-2">
-                  Products and Services Include:
-                </h4>
-                <p className="text-secondary/70 text-sm">
-                  Advanced Analytics, Data Visualization and Dashboards,
-                  Predictive Modeling, Data-Driven Decision-Making
+                <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
+                  Data Science
+                </h3>
+                <p className="text-secondary/70 mb-6 text-center">
+                  Our team can help you find insightful patterns in your
+                  data—and leverage them for better outcomes for you, your
+                  supporters, and your customers.
                 </p>
-              </div>
+                <div className="border-t border-accent/30 pt-4">
+                  <h4 className="font-medium text-secondary mb-2">
+                    Products and Services Include:
+                  </h4>
+                  <p className="text-secondary/70 text-sm">
+                    Advanced Analytics, Data Visualization and Dashboards,
+                    Predictive Modeling, Data-Driven Decision-Making
+                  </p>
+                </div>
+              </Link>
             </div>
 
             {/* Software Engineering */}
             <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-              <div className="flex justify-center mb-6">
-                <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Code className="h-8 w-8 text-primary" />
+              <Link href="/solutions/software-engineering">
+                <div className="flex justify-center mb-6">
+                  <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Code className="h-8 w-8 text-primary" />
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
-                Software Engineering
-              </h3>
-              <p className="text-secondary/70 mb-6 text-center">
-                We design and build robust, scalable software solutions tailored
-                to your business needs, from web applications to enterprise
-                systems.
-              </p>
-              <div className="border-t border-accent/30 pt-4">
-                <h4 className="font-medium text-secondary mb-2">
-                  Products and Services Include:
-                </h4>
-                <p className="text-secondary/70 text-sm">
-                  Custom Software Development, API Development, System
-                  Architecture, Cloud-Native Applications, Maintenance and
-                  Support
+                <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
+                  Software Engineering
+                </h3>
+                <p className="text-secondary/70 mb-6 text-center">
+                  We design and build robust, scalable software solutions
+                  tailored to your business needs, from web applications to
+                  enterprise systems.
                 </p>
-              </div>
+                <div className="border-t border-accent/30 pt-4">
+                  <h4 className="font-medium text-secondary mb-2">
+                    Products and Services Include:
+                  </h4>
+                  <p className="text-secondary/70 text-sm">
+                    Custom Software Development, API Development, System
+                    Architecture, Cloud-Native Applications, Maintenance and
+                    Support
+                  </p>
+                </div>
+              </Link>
             </div>
 
             {/* AI & Machine Learning */}
             <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-              <div className="flex justify-center mb-6">
-                <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <BrainCircuit className="h-8 w-8 text-primary" />
+              <Link href="/solutions/ai-machine-learning">
+                <div className="flex justify-center mb-6">
+                  <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <BrainCircuit className="h-8 w-8 text-primary" />
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
-                AI & Machine Learning
-              </h3>
-              <p className="text-secondary/70 mb-6 text-center">
-                We develop intelligent systems that learn from data to automate
-                decisions, predict outcomes, and uncover hidden insights for
-                your business.
-              </p>
-              <div className="border-t border-accent/30 pt-4">
-                <h4 className="font-medium text-secondary mb-2">
-                  Products and Services Include:
-                </h4>
-                <p className="text-secondary/70 text-sm">
-                  Predictive Analytics, Natural Language Processing, Computer
-                  Vision, Recommendation Systems, AI Model Development
+                <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
+                  AI & Machine Learning
+                </h3>
+                <p className="text-secondary/70 mb-6 text-center">
+                  We develop intelligent systems that learn from data to
+                  automate decisions, predict outcomes, and uncover hidden
+                  insights for your business.
                 </p>
-              </div>
+                <div className="border-t border-accent/30 pt-4">
+                  <h4 className="font-medium text-secondary mb-2">
+                    Products and Services Include:
+                  </h4>
+                  <p className="text-secondary/70 text-sm">
+                    Predictive Analytics, Natural Language Processing, Computer
+                    Vision, Recommendation Systems, AI Model Development
+                  </p>
+                </div>
+              </Link>
             </div>
 
             {/* Market Research */}
             <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-              <div className="flex justify-center mb-6">
-                <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <CircleDollarSign className="h-8 w-8 text-primary" />
+              <Link href="/solutions/market-research">
+                <div className="flex justify-center mb-6">
+                  <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <CircleDollarSign className="h-8 w-8 text-primary" />
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
-                Market Research
-              </h3>
-              <p className="text-secondary/70 mb-6 text-center">
-                Our baseline research, polling, and message testing take the
-                guesswork out of campaign development and content delivery,
-                ensuring you always put your best foot forward.
-              </p>
-              <div className="border-t border-accent/30 pt-4">
-                <h4 className="font-medium text-secondary mb-2">
-                  Products and Services Include:
-                </h4>
-                <p className="text-secondary/70 text-sm">
-                  Baseline Research and Audience Segmentation, Message Resonance
-                  Testing, Tracking Polls, Brand Positioning and Customer
-                  Surveys
+                <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
+                  Market Research
+                </h3>
+                <p className="text-secondary/70 mb-6 text-center">
+                  Our baseline research, polling, and message testing take the
+                  guesswork out of campaign development and content delivery,
+                  ensuring you always put your best foot forward.
                 </p>
-              </div>
+                <div className="border-t border-accent/30 pt-4">
+                  <h4 className="font-medium text-secondary mb-2">
+                    Products and Services Include:
+                  </h4>
+                  <p className="text-secondary/70 text-sm">
+                    Baseline Research and Audience Segmentation, Message
+                    Resonance Testing, Tracking Polls, Brand Positioning and
+                    Customer Surveys
+                  </p>
+                </div>
+              </Link>
             </div>
 
             {/* Market and Customer Segmentation */}
             <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-              <div className="flex justify-center mb-6">
-                <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Rss className="h-8 w-8 text-primary" />
+              <Link href="/solutions/digital-creative">
+                <div className="flex justify-center mb-6">
+                  <div className="h-16 w-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Rss className="h-8 w-8 text-primary" />
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
-                Digital and Creative
-              </h3>
-              <p className="text-secondary/70 mb-6 text-center">
-                We craft data-driven digital marketing campaigns powered by
-                precision audience segmentation and smart automation to maximize
-                your results
-              </p>
-              <div className="border-t border-accent/30 pt-4">
-                <h4 className="font-medium text-secondary mb-2">
-                  Products and Services Include:
-                </h4>
-                <p className="text-secondary/70 text-sm">
-                  Dynamic Creative Optimization (DCO), Programmatic Ad
-                  Campaigns, Personalized Content Engines, AI-Generated
-                  Marketing Assets, Cross-Channel Automation Workflows
+
+                <h3 className="text-xl font-bold mb-3 text-secondary text-center group-hover:text-[#FF8C4B] transition-colors">
+                  Digital and Creative
+                </h3>
+                <p className="text-secondary/70 mb-6 text-center">
+                  We craft data-driven digital marketing campaigns powered by
+                  precision audience segmentation and smart automation to
+                  maximize your results
                 </p>
-              </div>
+                <div className="border-t border-accent/30 pt-4">
+                  <h4 className="font-medium text-secondary mb-2">
+                    Products and Services Include:
+                  </h4>
+                  <p className="text-secondary/70 text-sm">
+                    Dynamic Creative Optimization (DCO), Programmatic Ad
+                    Campaigns, Personalized Content Engines, AI-Generated
+                    Marketing Assets, Cross-Channel Automation Workflows
+                  </p>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -815,12 +692,14 @@ export default function Home() {
           </div>
 
           <div className="mt-12 text-center">
-            <Button
-              variant="outline"
-              className="bg-primary text-white hover:bg-primary/10 px-6 py-3"
-            >
-              Meet our team →
-            </Button>
+            <Link href="/team">
+              <Button
+                variant="outline"
+                className="bg-primary text-white hover:bg-primary/10 px-6 py-3"
+              >
+                Meet our team →
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -836,307 +715,17 @@ export default function Home() {
               Join hundreds of organizations that have accelerated growth and
               improved operational efficiency with our data solutions.
             </p>
-            <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90">
-              Schedule a Free Consultation <ArrowRight className="h-4 w-4" />
-            </Button>
+            <Link href="/contact">
+              <Button
+                size="lg"
+                className="gap-2 bg-primary hover:bg-primary/90"
+              >
+                Schedule a Free Consultation <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
-      <section className="py-20 bg-white" id="contact">
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-        />
-        <div className="container mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-secondary">
-              Contact Us
-            </h2>
-            <p className="text-secondary/70 max-w-2xl mx-auto">
-              Have questions or ready to start your data journey? Reach out to
-              our team of experts.
-            </p>
-          </div>
-
-          {/* Form & Info Section */}
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Contact Form */}
-            <div className="bg-white p-8 rounded-xl border border-accent shadow-sm space-y-8">
-              <h3 className="text-xl font-bold text-secondary">
-                Send Us a Message
-              </h3>
-              <form onSubmit={sendEmail} className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-secondary">
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      placeholder="First"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-secondary">
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      placeholder="Last"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-secondary">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="your@email.com"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-secondary">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    name="subject"
-                    placeholder="Subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-secondary">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    placeholder="Tell us about your project or inquiry..."
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-accent/50 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-md"
-                >
-                  Send Message
-                </button>
-              </form>
-            </div>
-
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div className="bg-white p-8 rounded-xl border border-accent shadow-sm space-y-6">
-                <h3 className="text-xl font-bold text-secondary mb-6">
-                  Contact Information
-                </h3>
-
-                {/* Phone */}
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <FaPhoneAlt className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-secondary">Phone</h4>
-                    <p className="text-secondary/70">250-888-552-183</p>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <FaEnvelope className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-secondary">Email</h4>
-                    <p className="text-secondary/70">sales@vac.rw</p>
-                  </div>
-                </div>
-
-                {/* Location */}
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <FaMapMarkerAlt className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-secondary">Office</h4>
-                    <p className="text-secondary/70">
-                      KN 7 Ave, Kigali, Rwanda
-                    </p>
-                  </div>
-                </div>
-
-                {/* LinkedIn */}
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <FaLinkedin className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-secondary">LinkedIn</h4>
-                    <a
-                      href="https://www.linkedin.com/in/your-profile"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-secondary/70 hover:underline"
-                    >
-                      Visit Profile
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-8 rounded-xl border border-accent shadow-sm">
-                <h3 className="text-xl font-bold mb-6 text-secondary">
-                  Office Hours
-                </h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-secondary">Monday - Friday</span>
-                    <span className="text-secondary/70">9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-secondary">Saturday</span>
-                    <span className="text-secondary/70">Closed</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-secondary">Sunday</span>
-                    <span className="text-secondary/70">
-                      10:00 AM - 2:00 PM
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t bg-secondary text-white">
-        <div className="container py-12">
-          <div className="grid gap-8 md:grid-cols-4">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Globe className="h-6 w-6 text-accent" />
-                <span className="text-xl font-bold">Veritas Analytics</span>
-              </div>
-              <p className="text-white/70">
-                Empowering businesses with data-driven insights since 2015.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-medium mb-4">Services</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-white/70 hover:text-accent">
-                    Data Analytics
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-white/70 hover:text-accent">
-                    Business Intelligence
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-white/70 hover:text-accent">
-                    Strategic Consulting
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-white/70 hover:text-accent">
-                    Data Visualization
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-medium mb-4">Company</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-white/70 hover:text-accent">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#team"
-                    className="text-white/70 hover:text-accent"
-                  >
-                    Our Team
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-white/70 hover:text-accent">
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-white/70 hover:text-accent">
-                    Blog
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-medium mb-4">Contact</h3>
-              <ul className="space-y-2">
-                <li className="text-white/70">hello@veritasanalytics.com</li>
-                <li className="text-white/70">+1 (555) 123-4567</li>
-                <li className="text-white/70">
-                  123 Business Ave, Suite 100
-                  <br />
-                  San Francisco, CA 94107
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-white/70">
-              © 2025 Veritas Analytics. All rights reserved.
-            </p>
-            <div className="flex gap-4">
-              <Link href="#" className="text-white/70 hover:text-accent">
-                Privacy Policy
-              </Link>
-              <Link href="#" className="text-white/70 hover:text-accent">
-                Terms of Service
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

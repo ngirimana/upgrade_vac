@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+import Header from "@/components/ui/Header";
+import Footer from "@/components/ui/Footer";
 export const metadata: Metadata = {
   title: "Veritas Analytics & Consultants firm",
-  description: "Created with v0",
-  generator: "v0.dev",
+  description:
+    "Consulting firm for data analytics, business intelligence, and data engineering.",
 };
 
 export default function RootLayout({
@@ -14,7 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
