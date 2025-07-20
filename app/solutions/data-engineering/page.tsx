@@ -110,7 +110,7 @@ export default function DataEngineeringPage() {
               Database Design & Optimization
             </h3>
             <p className="text-secondary/70">
-              We architect secure, fast, and scalable databases—whether you're
+              We architect secure, fast, and scalable databases, whether you're
               handling megabytes or petabytes.
             </p>
           </div>
