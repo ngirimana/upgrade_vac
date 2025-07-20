@@ -125,7 +125,7 @@ export default function DataEngineeringPage() {
             </h3>
             <p className="text-secondary/70">
               We manage and migrate data across AWS, Azure, GCP, or on-prem
-              systems—ensuring speed, security, and compliance.
+              systems, ensuring speed, security, and compliance.
             </p>
           </div>
 
