@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className=" bg-white">
       {/* Navigation */}
-      <header className="sticky top-0 z-40 w-full border-b bg-white/80 backdrop-blur-sm">
+      <header className="static top-0 z-40 w-full border-b bg-white/80 backdrop-blur-sm">
         <div className="container flex h-20 items-center justify-between">
           <div className="flex items-center gap-2">
             <img

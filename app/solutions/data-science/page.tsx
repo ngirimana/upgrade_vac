@@ -4,6 +4,7 @@ import { ArrowRight, Bot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import DataScienceImage from "@/public/data-science.png"; // Update this path to your actual image
+import Link from "next/link";
 
 export default function DataSciencePage() {
   return (
@@ -111,6 +112,23 @@ export default function DataSciencePage() {
               systems and make sure they stay accurate over time.
             </p>
           </div>
+        </div>
+      </section>
+      {/* CTA */}
+      <section className="bg-accent/20 py-20">
+        <div className="container text-center">
+          <h2 className="text-3xl font-bold text-secondary mb-4">
+            Use Data to Drive Smart Decisions
+          </h2>
+          <p className="text-secondary/70 mb-8">
+            Work with VAC to uncover patterns, forecast outcomes, and build
+            intelligent models that move your business forward.
+          </p>
+          <Link href="/contact">
+            <Button className="bg-primary hover:bg-primary/90" size="lg">
+              Book a Consultation
+            </Button>
+          </Link>
         </div>
       </section>
     </div>

@@ -4,6 +4,7 @@ import { ArrowRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import marketImage from "@/public/market-research.png"; // Add your own image
+import Link from "next/link";
 
 export default function MarketResearchPage() {
   return (
@@ -140,6 +141,23 @@ export default function MarketResearchPage() {
               that make decision-making easy.
             </p>
           </div>
+        </div>
+      </section>
+      {/* CTA */}
+      <section className="bg-accent/20 py-20">
+        <div className="container text-center">
+          <h2 className="text-3xl font-bold text-secondary mb-4">
+            Make Confident Moves Backed by Research
+          </h2>
+          <p className="text-secondary/70 mb-8">
+            Partner with VAC to gain clear insights about your market, audience,
+            and competition, so every decision is informed.
+          </p>
+          <Link href="/contact">
+            <Button className="bg-primary hover:bg-primary/90" size="lg">
+              Book a Consultation
+            </Button>
+          </Link>
         </div>
       </section>
     </div>

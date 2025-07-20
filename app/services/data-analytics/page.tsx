@@ -3,6 +3,7 @@ import { ArrowRight, BarChart2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import DataAnalytics from "@/public/data-analytics.png";
+import Link from "next/link";
 
 export default function DataAnalyticsPage() {
   return (
@@ -101,21 +102,21 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="bg-accent/20 py-20">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4 text-secondary">
-              Ready to Transform Your Business with Data?
-            </h2>
-            <p className="text-secondary/70 mb-8">
-              Let us help you unlock the full potential of your data and drive
-              better business outcomes.
-            </p>
-            <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90">
-              Book a Consultation <ArrowRight className="h-4 w-4" />
+        <div className="container text-center">
+          <h2 className="text-3xl font-bold text-secondary mb-4">
+            Use Data to Drive Smart Decisions
+          </h2>
+          <p className="text-secondary/70 mb-8">
+            Work with VAC to uncover patterns, forecast outcomes, and build
+            intelligent models that move your business forward.
+          </p>
+          <Link href="/contact">
+            <Button className="bg-primary hover:bg-primary/90" size="lg">
+              Book a Consultation
             </Button>
-          </div>
+          </Link>
         </div>
       </section>
     </div>
