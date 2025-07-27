@@ -7,7 +7,6 @@ import {
   Settings,
   ShieldCheck,
   Search,
-  
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -36,18 +35,6 @@ export default function StrategicConsultingPage() {
                 transformation. From market entry to operational efficiency, our
                 consulting delivers lasting impact.
               </p>
-              <div className="flex gap-4">
-                <Button className="bg-primary hover:bg-primary/90" size="lg">
-                  Get Started
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-secondary text-secondary hover:bg-secondary/10"
-                  size="lg"
-                >
-                  Learn More
-                </Button>
-              </div>
             </div>
             <div className="relative hidden md:block">
               <div className="h-[400px] bg-white rounded-xl shadow-xl flex items-center justify-center">

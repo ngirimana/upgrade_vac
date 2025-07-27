@@ -28,21 +28,6 @@ export default function SoftwareEngineeringPage() {
                 operational efficiency and innovation. From system architecture
                 to deployment, we bring your vision to life with code.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  className="gap-2 bg-primary hover:bg-primary/90"
-                >
-                  Get Started <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-secondary text-secondary hover:bg-secondary/10"
-                >
-                  Learn More
-                </Button>
-              </div>
             </div>
             <div className="relative hidden md:block">
               <div className="h-[400px] bg-white rounded-xl shadow-xl flex items-center justify-center">

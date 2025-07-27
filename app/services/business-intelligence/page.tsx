@@ -35,18 +35,6 @@ export default function BusinessIntelligencePage() {
                 to make data-driven decisions through advanced analytics,
                 interactive dashboards, and real-time reporting.
               </p>
-              <div className="flex gap-4">
-                <Button className="bg-primary hover:bg-primary/90" size="lg">
-                  Get Started
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-secondary text-secondary hover:bg-secondary/10"
-                  size="lg"
-                >
-                  Learn More
-                </Button>
-              </div>
             </div>
             <div className="relative hidden md:block">
               <div className="h-[400px] bg-white rounded-xl shadow-xl flex items-center justify-center">

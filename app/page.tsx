@@ -51,19 +51,23 @@ export default function Contact() {
                 competitive advantage.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  className="gap-2 bg-primary hover:bg-primary/90"
-                >
-                  Get Started <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-secondary text-secondary hover:bg-secondary/10"
-                >
-                  Learn More
-                </Button>
+                <Link href="/services">
+                  <Button
+                    size="lg"
+                    className="gap-2 bg-primary hover:bg-primary/90"
+                  >
+                    Get Started <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/solutions">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-secondary text-secondary hover:bg-secondary/10"
+                  >
+                    Learn More
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="relative">
@@ -720,7 +724,7 @@ export default function Contact() {
                 size="lg"
                 className="gap-2 bg-primary hover:bg-primary/90"
               >
-                Schedule a Free Consultation <ArrowRight className="h-4 w-4" />
+                Schedule a Consultation <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
