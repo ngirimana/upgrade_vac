@@ -433,6 +433,12 @@ export default function Contact() {
                     Development, Data Enrichment
                   </p>
                 </div>
+                <Link
+                  href="/solutions/data-engineering"
+                  className="text-primary font-medium inline-flex items-center gap-1 hover:underline mt-4"
+                >
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </Link>
               </Link>
             </div>
 
@@ -461,6 +467,12 @@ export default function Contact() {
                     Predictive Modeling, Data-Driven Decision-Making
                   </p>
                 </div>
+                <Link
+                  href="/solutions/data-science"
+                  className="text-primary font-medium inline-flex items-center gap-1 hover:underline mt-4"
+                >
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </Link>
               </Link>
             </div>
 
@@ -490,6 +502,12 @@ export default function Contact() {
                     Support
                   </p>
                 </div>
+                <Link
+                  href="/solutions/software-engineering"
+                  className="text-primary font-medium inline-flex items-center gap-1 hover:underline mt-4"
+                >
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </Link>
               </Link>
             </div>
 
@@ -518,6 +536,12 @@ export default function Contact() {
                     Vision, Recommendation Systems, AI Model Development
                   </p>
                 </div>
+                <Link
+                  href="/solutions/ai-machine-learning"
+                  className="text-primary font-medium inline-flex items-center gap-1 hover:underline mt-4"
+                >
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </Link>
               </Link>
             </div>
 
@@ -547,6 +571,12 @@ export default function Contact() {
                     Customer Surveys
                   </p>
                 </div>
+                <Link
+                  href="/solutions/market-research"
+                  className="text-primary font-medium inline-flex items-center gap-1 hover:underline mt-4"
+                >
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </Link>
               </Link>
             </div>
 
@@ -577,6 +607,12 @@ export default function Contact() {
                     Marketing Assets, Cross-Channel Automation Workflows
                   </p>
                 </div>
+              </Link>
+              <Link
+                href="/solutions/digital-creative"
+                className="text-primary font-medium inline-flex items-center gap-1 hover:underline mt-4"
+              >
+                Learn more <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
