@@ -87,7 +87,7 @@ export default function Footer() {
           <div>
             <h3 className="font-medium mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li className="text-white/70">info@vac.rw</li>
+              <li className="text-white/70">vacfirm@gmail.com</li>
               <li className="text-white/70">+250 788 123 456</li>
               <li className="text-white/70">
                 KN 7 Avenue, Kigali

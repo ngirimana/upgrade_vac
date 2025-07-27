@@ -199,7 +199,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-medium text-secondary">Email</h4>
-                    <p className="text-secondary/70">sales@vac.rw</p>
+                    <p className="text-secondary/70">vacfirm@gmail.com</p>
                   </div>
                 </div>
 
