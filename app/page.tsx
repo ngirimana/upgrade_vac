@@ -168,59 +168,65 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-              <BarChart2 className="h-6 w-6 text-primary group-hover:scale-120 transition-transform duration-300" />
-            </div>
-            <h3 className="text-xl font-bold mb-2 text-secondary group-hover:text-[#FF8C4B] transition-colors">
-              Data Analytics
-            </h3>
-            <p className="text-secondary/70 mb-4">
-              Transform raw data into actionable insights with our advanced
-              analytics solutions.
-            </p>
-            <Link
-              href="/services/data-analytics"
-              className="text-primary font-medium inline-flex items-center gap-1 hover:underline"
-            >
-              Learn more <ArrowRight className="h-4 w-4" />
+            <Link href="/services/data-analytics">
+              <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+                <BarChart2 className="h-6 w-6 text-primary group-hover:scale-120 transition-transform duration-300" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-secondary group-hover:text-[#FF8C4B] transition-colors">
+                Data Analytics
+              </h3>
+              <p className="text-secondary/70 mb-4">
+                Transform raw data into actionable insights with our advanced
+                analytics solutions.
+              </p>
+              <Link
+                href="/services/data-analytics"
+                className="text-primary font-medium inline-flex items-center gap-1 hover:underline"
+              >
+                Learn more <ArrowRight className="h-4 w-4" />
+              </Link>
             </Link>
           </div>
 
           <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-              <LineChart className="h-6 w-6 text-primary group-hover:scale-120 transition-transform duration-300" />
-            </div>
-            <h3 className="text-xl font-bold mb-2 text-secondary group-hover:text-[#FF8C4B] transition-colors">
-              Business Intelligence
-            </h3>
-            <p className="text-secondary/70 mb-4">
-              Make informed decisions with our comprehensive business
-              intelligence platforms.
-            </p>
-            <Link
-              href="/services/business-intelligence"
-              className="text-primary font-medium inline-flex items-center gap-1 hover:underline"
-            >
-              Learn more <ArrowRight className="h-4 w-4" />
+            <Link href="/services/business-intelligence">
+              <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+                <LineChart className="h-6 w-6 text-primary group-hover:scale-120 transition-transform duration-300" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-secondary group-hover:text-[#FF8C4B] transition-colors">
+                Business Intelligence
+              </h3>
+              <p className="text-secondary/70 mb-4">
+                Make informed decisions with our comprehensive business
+                intelligence platforms.
+              </p>
+              <Link
+                href="/services/business-intelligence"
+                className="text-primary font-medium inline-flex items-center gap-1 hover:underline"
+              >
+                Learn more <ArrowRight className="h-4 w-4" />
+              </Link>
             </Link>
           </div>
 
           <div className="bg-white p-8 rounded-xl border border-accent shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px] group">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-              <Users className="h-6 w-6 text-primary group-hover:scale-120 transition-transform duration-300" />
-            </div>
-            <h3 className="text-xl font-bold mb-2 text-secondary group-hover:text-[#FF8C4B] transition-colors">
-              Strategic Consulting
-            </h3>
-            <p className="text-secondary/70 mb-4">
-              Expert guidance to help you navigate complex business challenges
-              and opportunities.
-            </p>
-            <Link
-              href="/services/strategic-consulting"
-              className="text-primary font-medium inline-flex items-center gap-1 hover:underline"
-            >
-              Learn more <ArrowRight className="h-4 w-4" />
+            <Link href="/services/strategic-consulting">
+              <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+                <Users className="h-6 w-6 text-primary group-hover:scale-120 transition-transform duration-300" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-secondary group-hover:text-[#FF8C4B] transition-colors">
+                Strategic Consulting
+              </h3>
+              <p className="text-secondary/70 mb-4">
+                Expert guidance to help you navigate complex business challenges
+                and opportunities.
+              </p>
+              <Link
+                href="/services/strategic-consulting"
+                className="text-primary font-medium inline-flex items-center gap-1 hover:underline"
+              >
+                Learn more <ArrowRight className="h-4 w-4" />
+              </Link>
             </Link>
           </div>
         </div>
