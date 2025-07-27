@@ -33,7 +33,7 @@ const teamMembers: TeamMember[] = [
     imageSrc: "/schadrack.jpg",
     bio: `Ngirimana Schadrack is a software engineer and DevOps specialist with a strong focus on building scalable systems and automating cloud infrastructure. He holds a Master’s degree in Software Engineering from Carnegie Mellon University Africa and a background in Computer Engineering, combining deep backend expertise with hands-on DevOps practices.
     He currently serves as Senior DevOps Engineer at AOS Ltd. He designs secure CI/CD pipelines, automates deployments using ArgoCD and Terraform, and implements observability with Grafana and Prometheus. Schadrack has also built and maintained full-stack applications using technologies like NestJS, Node.js, Spring Boot, Go, React, and Next.js, and has led infrastructure projects involving Kubernetes and containerization. He is passionate about clean code, developer productivity, and reliable system operations.
-    At VAC, Schadrack brings a blend of deep technical expertise and practical problem-solving to help build robust digital platforms, streamline development workflows, and ensure infrastructure scalability and reliability for data-driven solutions`,
+    At VAC, Schadrack brings a blend of deep technical expertise and practical problem-solving to help build robust digital platforms, streamline development workflows, and ensure infrastructure scalability and reliability for data-driven solutions.`,
     linkedinUrl: "https://www.linkedin.com/in/schadrack-ngirimana-650507162/",
   },
   {
