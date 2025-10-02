@@ -49,21 +49,29 @@ jobs:
     needs: ci
     if: ${{ needs.ci.result == 'success' }}
     runs-on: ubuntu-latest
-    # Optional: guard deploys behind an environment with approvals
-    # environment: production
 
     steps:
-      - name: Setup SSH
+      - name: Recreate private key from base64
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_KEY_BASE64 }}" | base64 -d > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+          chmod 700 ~/.ssh
+
+      - name: Add server to known_hosts
+        run: |
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+
+      - name: Test SSH connectivity (no command)
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP:   ${{ secrets.SERVER_IP }}
+        run: |
+          ssh -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519 "$SERVER_USER@$SERVER_IP" 'echo "SSH handshake OK"'
 
       - name: Run remote deploy script
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_IP:   ${{ secrets.SERVER_IP }}
         run: |
-          
-          ssh -i ~/.ssh/id_ed25519 "$SERVER_USER@$SERVER_IP" 'bash ~/vacrw/deploy.sh'
+          ssh -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519 "$SERVER_USER@$SERVER_IP" 'bash ~/vacrw/deploy.sh'
