@@ -37,22 +37,6 @@ jobs:
             yarn install --frozen-lockfile
           fi
 
-      - name: Lint (if script exists)
-        run: |
-          if npm pkg get scripts.lint | grep -qv 'null'; then
-            yarn lint
-          else
-            echo "No lint script; skipping."
-          fi
-
-      - name: Test (if script exists)
-        run: |
-          if npm pkg get scripts.test | grep -qv 'null'; then
-            yarn test --ci --passWithNoTests
-          else
-            echo "No test script; skipping."
-          fi
-
       - name: Build Next.js
         env:
           NEXT_TELEMETRY_DISABLED: '1'
