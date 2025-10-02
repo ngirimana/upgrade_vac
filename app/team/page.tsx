@@ -23,7 +23,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "David Hagumuwumva",
     title: "Chief Technology Officer",
-    imageSrc: "/profile.jpg",
+    imageSrc: "/david.jpeg",
     bio: `David is a Financial Stability Monitoring Analyst at the National Bank of Rwanda, where he oversees the progress and sets strategies for banking operations within the country. David also spends his time teaching at Adventists University of East and Central Africa as an assistant lecturer. He holds a Master’s degree in Electrical and Computer Engineering from Carnegie Mellon University (CMU), where he focused on data science. Before joining CMU, he spent time working as a data analyst in the research and development department at Earth Enable (TUBEHEZA). He also holds a Bachelor's degree in Mathematics from the University of Rwanda, College of Science and Technology. David is interested in combining data and traditional statistical models to make business decisions.`,
     linkedinUrl: "https://www.linkedin.com/in/david-hagumuwumva-82125b21a/",
   },
@@ -39,7 +39,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Consolee Muragijimana",
     title: "Chief Financial Officer",
-    imageSrc: "/console.png",
+    imageSrc: "/console.jpg",
     bio: `Consolee is a Data Scientist (Business Intelligence) at Bank of Kigali (BK), the biggest commercial bank in Rwanda. Her primary roles are building models, analyzing data, automating reports, and advising the Bank's leadership on performance. She holds a Master's degree in Mathematical Sciences from the African Institute for Mathematical Sciences (AIMS Rwanda), majoring in Data Science. Consolee brings in rich experience in analyzing big data and building business dashboards.`,
     linkedinUrl: "https://www.linkedin.com/in/consolee-muragijimana-b33a3a21a/",
   },

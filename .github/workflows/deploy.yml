@@ -1,0 +1,85 @@
+name: CI & Deploy (vac.rw)
+
+on:
+  push:
+    branches: [ main ]   # Change if your prod branch differs
+  workflow_dispatch: {}   # Allow manual runs
+
+concurrency:
+  group: deploy-vacrw
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Build (CI)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (LTS) + Yarn cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'yarn'
+
+      - name: Enable Corepack (Yarn)
+        run: corepack enable
+
+      - name: Install dependencies
+        run: |
+          if [ -f .yarnrc.yml ]; then
+            echo "Yarn Berry detected"
+            yarn install --immutable
+          else
+            echo "Yarn Classic detected"
+            yarn install --frozen-lockfile
+          fi
+
+      - name: Lint (if script exists)
+        run: |
+          if npm pkg get scripts.lint | grep -qv 'null'; then
+            yarn lint
+          else
+            echo "No lint script; skipping."
+          fi
+
+      - name: Test (if script exists)
+        run: |
+          if npm pkg get scripts.test | grep -qv 'null'; then
+            yarn test --ci --passWithNoTests
+          else
+            echo "No test script; skipping."
+          fi
+
+      - name: Build Next.js
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+          # Put build-time env here if needed:
+          # NEXT_PUBLIC_API_BASE: https://vac.rw/api
+        run: yarn build
+
+  deploy:
+    name: Deploy to Contabo
+    needs: ci
+    if: ${{ needs.ci.result == 'success' }}
+    runs-on: ubuntu-latest
+    # Optional: guard deploys behind an environment with approvals
+    # environment: production
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+
+      - name: Run remote deploy script
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP:   ${{ secrets.SERVER_IP }}
+        run: |
+          
+          ssh -i ~/.ssh/id_ed25519 "$SERVER_USER@$SERVER_IP" 'bash ~/vacrw/deploy.sh'
