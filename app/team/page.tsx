@@ -15,7 +15,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Dr. Jean De Dieu Niyonzima",
     title: "CEO",
-    imageSrc: "/profile.jpg",
+    imageSrc: "/jado.jpeg",
     bio: `Jean De Dieu is a lecturer of Physics at University of Rwanda. He holds a Doctor of Philosophy in Physics and Chemistry of Materials from Sorbonne University in France. During his research endeavors, he immersed himself in developing Python scripts for analyzing experimental data. His proficient data analysis skills allow him to uncover intricate patterns, interpret experimental findings, and explore material properties in depth. He also holds a Master’s degree in Mathematical Sciences (climate resilience), which marked the beginning of his journey as a data analyst. He is also highly interested in financial and actuarial mathematics.`,
     linkedinUrl:
       "https://www.linkedin.com/in/dr-jean-de-dieu-niyonzima-7ba62411a/",
