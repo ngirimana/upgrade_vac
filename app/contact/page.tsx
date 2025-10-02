@@ -188,7 +188,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-medium text-secondary">Phone</h4>
-                    <p className="text-secondary/70">250-888-552-183</p>
+                    <p className="text-secondary/70">250-783-11-431</p>
                   </div>
                 </div>
 
