@@ -2,7 +2,7 @@ name: CI & Deploy (vac.rw)
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch: {}
 
 concurrency:
@@ -21,8 +21,8 @@ jobs:
       - name: Setup Node (LTS) + Yarn cache
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-          cache: 'yarn'
+          node-version: "lts/*"
+          cache: "yarn"
 
       - name: Enable Corepack (Yarn)
         run: corepack enable
@@ -39,68 +39,54 @@ jobs:
 
       - name: Build Next.js
         env:
-          NEXT_TELEMETRY_DISABLED: '1'
+          NEXT_TELEMETRY_DISABLED: "1"
         run: yarn build
 
-  deploy:
-    name: Deploy to Contabo
-    needs: ci
-    if: ${{ needs.ci.result == 'success' }}
-    runs-on: ubuntu-latest
+deploy:
+  name: Deploy to Contabo (password)
+  needs: ci
+  if: ${{ needs.ci.result == 'success' }}
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: Recreate private key from base64 (ed25519)
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p ~/.ssh
+  steps:
+    - name: Install sshpass
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y sshpass
 
-          # Decode private key stored in secrets.SSH_KEY_BASE64
-          printf '%s' "${{ secrets.SSH_KEY_BASE64 }}" | tr -d '\r\n ' | base64 -d > ~/.ssh/id_ed25519
+    - name: Add server to known_hosts
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts
+        chmod 700 ~/.ssh
+        chmod 600 ~/.ssh/known_hosts
 
-          chmod 600 ~/.ssh/id_ed25519
-          chmod 700 ~/.ssh
+    - name: Test SSH connectivity (password)
+      env:
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+        SERVER_IP: ${{ secrets.SERVER_IP }}
+        SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+      run: |
+        echo "Target is: ${SERVER_USER}@${SERVER_IP}"
 
-          echo "Runner key fingerprint:"
-          ssh-keygen -lf ~/.ssh/id_ed25519
+        sshpass -p "${SERVER_PASSWORD}" ssh \
+          -o PreferredAuthentications=password \
+          -o PubkeyAuthentication=no \
+          -o PasswordAuthentication=yes \
+          -o StrictHostKeyChecking=yes \
+          "${SERVER_USER}@${SERVER_IP}" \
+          'whoami && hostname && echo "SSH handshake OK"'
 
-      - name: Add server to known_hosts
-        shell: bash
-        run: |
-          set -euo pipefail
-          ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts
-
-      - name: Test SSH connectivity
-        shell: bash
-        env:
-          SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_IP:   ${{ secrets.SERVER_IP }}
-        run: |
-          set -euo pipefail
-          echo "Target is: ${SERVER_USER}@${SERVER_IP}"
-
-          ssh \
-            -o BatchMode=yes \
-            -o PreferredAuthentications=publickey \
-            -o PasswordAuthentication=no \
-            -o IdentitiesOnly=yes \
-            -i ~/.ssh/id_ed25519 \
-            "${SERVER_USER}@${SERVER_IP}" \
-            'whoami && hostname && echo "SSH handshake OK"'
-
-      - name: Run remote deploy script
-        shell: bash
-        env:
-          SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_IP:   ${{ secrets.SERVER_IP }}
-        run: |
-          set -euo pipefail
-
-          ssh \
-            -o BatchMode=yes \
-            -o PreferredAuthentications=publickey \
-            -o PasswordAuthentication=no \
-            -o IdentitiesOnly=yes \
-            -i ~/.ssh/id_ed25519 \
-            "${SERVER_USER}@${SERVER_IP}" \
-            'bash ~/vacrw/deploy.sh'
+    - name: Run remote deploy script (password)
+      env:
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+        SERVER_IP: ${{ secrets.SERVER_IP }}
+        SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+      run: |
+        sshpass -p "${SERVER_PASSWORD}" ssh \
+          -o PreferredAuthentications=password \
+          -o PubkeyAuthentication=no \
+          -o PasswordAuthentication=yes \
+          -o StrictHostKeyChecking=yes \
+          "${SERVER_USER}@${SERVER_IP}" \
+          'bash ~/vacrw/deploy.sh'
