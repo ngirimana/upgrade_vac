@@ -42,51 +42,51 @@ jobs:
           NEXT_TELEMETRY_DISABLED: "1"
         run: yarn build
 
-deploy:
-  name: Deploy to Contabo (password)
-  needs: ci
-  if: ${{ needs.ci.result == 'success' }}
-  runs-on: ubuntu-latest
+  deploy:
+    name: Deploy to Contabo (password)
+    needs: ci
+    if: ${{ needs.ci.result == 'success' }}
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Install sshpass
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y sshpass
+    steps:
+      - name: Install sshpass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
 
-    - name: Add server to known_hosts
-      run: |
-        mkdir -p ~/.ssh
-        ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts
-        chmod 700 ~/.ssh
-        chmod 600 ~/.ssh/known_hosts
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/known_hosts
 
-    - name: Test SSH connectivity (password)
-      env:
-        SERVER_USER: ${{ secrets.SERVER_USER }}
-        SERVER_IP: ${{ secrets.SERVER_IP }}
-        SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-      run: |
-        echo "Target is: ${SERVER_USER}@${SERVER_IP}"
+      - name: Test SSH connectivity (password)
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          echo "Target is: ${SERVER_USER}@${SERVER_IP}"
 
-        sshpass -p "${SERVER_PASSWORD}" ssh \
-          -o PreferredAuthentications=password \
-          -o PubkeyAuthentication=no \
-          -o PasswordAuthentication=yes \
-          -o StrictHostKeyChecking=yes \
-          "${SERVER_USER}@${SERVER_IP}" \
-          'whoami && hostname && echo "SSH handshake OK"'
+          sshpass -p "${SERVER_PASSWORD}" ssh \
+            -o PreferredAuthentications=password \
+            -o PubkeyAuthentication=no \
+            -o PasswordAuthentication=yes \
+            -o StrictHostKeyChecking=yes \
+            "${SERVER_USER}@${SERVER_IP}" \
+            'whoami && hostname && echo "SSH handshake OK"'
 
-    - name: Run remote deploy script (password)
-      env:
-        SERVER_USER: ${{ secrets.SERVER_USER }}
-        SERVER_IP: ${{ secrets.SERVER_IP }}
-        SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-      run: |
-        sshpass -p "${SERVER_PASSWORD}" ssh \
-          -o PreferredAuthentications=password \
-          -o PubkeyAuthentication=no \
-          -o PasswordAuthentication=yes \
-          -o StrictHostKeyChecking=yes \
-          "${SERVER_USER}@${SERVER_IP}" \
-          'bash ~/vacrw/deploy.sh'
+      - name: Run remote deploy script (password)
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          sshpass -p "${SERVER_PASSWORD}" ssh \
+            -o PreferredAuthentications=password \
+            -o PubkeyAuthentication=no \
+            -o PasswordAuthentication=yes \
+            -o StrictHostKeyChecking=yes \
+            "${SERVER_USER}@${SERVER_IP}" \
+            'bash ~/vacrw/deploy.sh'
