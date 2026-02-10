@@ -18,24 +18,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node (LTS) + Yarn cache
+      - name: Setup Node 22.14.0 + Yarn cache
         uses: actions/setup-node@v4
         with:
-          node-version: "lts/*"
+          node-version: "22.14.0"
           cache: "yarn"
 
-      - name: Enable Corepack (Yarn)
-        run: corepack enable
+      - name: Install Yarn Classic (1.22.22)
+        run: npm i -g yarn@1.22.22
 
-      - name: Install dependencies
-        run: |
-          if [ -f .yarnrc.yml ]; then
-            echo "Yarn Berry detected"
-            yarn install --immutable
-          else
-            echo "Yarn Classic detected"
-            yarn install --frozen-lockfile
-          fi
+      - name: Install dependencies (Yarn Classic)
+        run: yarn install --frozen-lockfile
 
       - name: Build Next.js
         env:
@@ -43,7 +36,7 @@ jobs:
         run: yarn build
 
   deploy:
-    name: Deploy to Contabo (password)
+    name: Deploy to Contabo
     needs: ci
     if: ${{ needs.ci.result == 'success' }}
     runs-on: ubuntu-latest
@@ -68,28 +61,24 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           echo "Target is: ${SERVER_USER}@${SERVER_IP}"
-
           sshpass -p "${SERVER_PASSWORD}" ssh \
             -o PreferredAuthentications=password \
             -o PubkeyAuthentication=no \
             -o PasswordAuthentication=yes \
             -o StrictHostKeyChecking=yes \
             "${SERVER_USER}@${SERVER_IP}" \
-            'whoami && hostname && echo "SSH handshake OK"'
+            "whoami && hostname && echo SSH_OK"
 
-      - name: Run remote deploy script (password)
-        shell: bash
+      - name: Run remote deploy script
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_IP:   ${{ secrets.SERVER_IP }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
-          set -euo pipefail
-
-          sshpass -p "$SERVER_PASSWORD" ssh \
+          sshpass -p "${SERVER_PASSWORD}" ssh \
             -o PreferredAuthentications=password \
             -o PubkeyAuthentication=no \
             -o PasswordAuthentication=yes \
             -o StrictHostKeyChecking=yes \
-            "$SERVER_USER@$SERVER_IP" \
+            "${SERVER_USER}@${SERVER_IP}" \
             "bash /home/app/vacrw/deploy.sh"
