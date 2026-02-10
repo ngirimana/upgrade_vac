@@ -89,4 +89,4 @@ jobs:
             -o PasswordAuthentication=yes \
             -o StrictHostKeyChecking=yes \
             "${SERVER_USER}@${SERVER_IP}" \
-            'bash ~/vacrw/deploy.sh'
+            'bash /home/app/vacrw/deploy.sh''
