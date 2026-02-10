@@ -17,7 +17,7 @@ git reset --hard
 git pull origin main
 
 echo ">>> Installing dependencies..."
-yarn install --frozen-lockfile
+yarn install 
 
 echo ">>> Building Next.js..."
 yarn build
