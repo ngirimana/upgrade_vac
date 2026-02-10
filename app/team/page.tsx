@@ -22,14 +22,14 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "David Hagumuwumva",
-    title: "Chief Technology Officer",
+    title: "Managing Director",
     imageSrc: "/david.jpeg",
     bio: `David is a Financial Stability Monitoring Analyst at the National Bank of Rwanda, where he oversees the progress and sets strategies for banking operations within the country. David also spends his time teaching at Adventists University of East and Central Africa as an assistant lecturer. He holds a Master’s degree in Electrical and Computer Engineering from Carnegie Mellon University (CMU), where he focused on data science. Before joining CMU, he spent time working as a data analyst in the research and development department at Earth Enable (TUBEHEZA). He also holds a Bachelor's degree in Mathematics from the University of Rwanda, College of Science and Technology. David is interested in combining data and traditional statistical models to make business decisions.`,
     linkedinUrl: "https://www.linkedin.com/in/david-hagumuwumva-82125b21a/",
   },
   {
     name: "NGIRIMANA Schadrack",
-    title: "Technical Lead",
+    title: "Chief Technology Officer",
     imageSrc: "/schadrack.jpg",
     bio: `Ngirimana Schadrack is a software engineer and DevOps specialist with a strong focus on building scalable systems and automating cloud infrastructure. He holds a Master’s degree in Software Engineering from Carnegie Mellon University Africa and a background in Computer Engineering, combining deep backend expertise with hands-on DevOps practices.
     He currently serves as Senior DevOps Engineer at AOS Ltd. He designs secure CI/CD pipelines, automates deployments using ArgoCD and Terraform, and implements observability with Grafana and Prometheus. Schadrack has also built and maintained full-stack applications using technologies like NestJS, Node.js, Spring Boot, Go, React, and Next.js, and has led infrastructure projects involving Kubernetes and containerization. He is passionate about clean code, developer productivity, and reliable system operations.
