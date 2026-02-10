@@ -13,7 +13,7 @@ type TeamMember = {
 
 const teamMembers: TeamMember[] = [
   {
-    name: "Dr. Jean De Dieu Niyonzima",
+    name: "Dr. Jean De Dieu NIYONZIMA",
     title: "CEO",
     imageSrc: "/jado.jpeg",
     bio: `Jean De Dieu is a lecturer of Physics at University of Rwanda. He holds a Doctor of Philosophy in Physics and Chemistry of Materials from Sorbonne University in France. During his research endeavors, he immersed himself in developing Python scripts for analyzing experimental data. His proficient data analysis skills allow him to uncover intricate patterns, interpret experimental findings, and explore material properties in depth. He also holds a Master’s degree in Mathematical Sciences (climate resilience), which marked the beginning of his journey as a data analyst. He is also highly interested in financial and actuarial mathematics.`,
@@ -21,7 +21,7 @@ const teamMembers: TeamMember[] = [
       "https://www.linkedin.com/in/dr-jean-de-dieu-niyonzima-7ba62411a/",
   },
   {
-    name: "David Hagumuwumva",
+    name: "David HAGUMUWUNVA",
     title: "Managing Director",
     imageSrc: "/david.jpeg",
     bio: `David is a Financial Stability Monitoring Analyst at the National Bank of Rwanda, where he oversees the progress and sets strategies for banking operations within the country. David also spends his time teaching at Adventists University of East and Central Africa as an assistant lecturer. He holds a Master’s degree in Electrical and Computer Engineering from Carnegie Mellon University (CMU), where he focused on data science. Before joining CMU, he spent time working as a data analyst in the research and development department at Earth Enable (TUBEHEZA). He also holds a Bachelor's degree in Mathematics from the University of Rwanda, College of Science and Technology. David is interested in combining data and traditional statistical models to make business decisions.`,
@@ -37,14 +37,14 @@ const teamMembers: TeamMember[] = [
     linkedinUrl: "https://www.linkedin.com/in/schadrack-ngirimana-650507162/",
   },
   {
-    name: "Consolee Muragijimana",
+    name: "Consolee MURAGIJIMANA",
     title: "Chief Financial Officer",
     imageSrc: "/console.jpg",
     bio: `Consolee is a Data Scientist (Business Intelligence) at Bank of Kigali (BK), the biggest commercial bank in Rwanda. Her primary roles are building models, analyzing data, automating reports, and advising the Bank's leadership on performance. She holds a Master's degree in Mathematical Sciences from the African Institute for Mathematical Sciences (AIMS Rwanda), majoring in Data Science. Consolee brings in rich experience in analyzing big data and building business dashboards.`,
     linkedinUrl: "https://www.linkedin.com/in/consolee-muragijimana-b33a3a21a/",
   },
   {
-    name: "Jean Modeste Mushimiyimana",
+    name: "Jean Modeste MUSHIMIYIMANA",
     title: "Chief Operation Officer",
     imageSrc: "/modeste.jpg",
     bio: `Modeste is a dedicated Data Scientist, currently pursuing a PhD in Environmental Systems Sciences at ETH Zurich, Switzerland. As an Environmental Physicist, he has a strong background and experience in environmental data processing, analysis, and modeling. Previously, Modeste earned two Master’s degrees: one in Mathematical Sciences with specialization in Data Science and Climate Science from AIMS Rwanda; and a research-based Master’s in Technical Physics, focusing on environmental modeling, from Lappeenranta-Lahti University of Technology (LUT), Finland. Modeste is passionate about research, consulting, and working on projects that involve data analytics and modeling. He believes that “humans can experience and interact with nature, but nature communicates accurately with us through the recorded data.”`,
