@@ -2,8 +2,8 @@ name: CI & Deploy (vac.rw)
 
 on:
   push:
-    branches: [ main ]   # Change if your prod branch differs
-  workflow_dispatch: {}   # Allow manual runs
+    branches: [ main ]
+  workflow_dispatch: {}
 
 concurrency:
   group: deploy-vacrw
@@ -40,8 +40,6 @@ jobs:
       - name: Build Next.js
         env:
           NEXT_TELEMETRY_DISABLED: '1'
-          # Put build-time env here if needed:
-          # NEXT_PUBLIC_API_BASE: https://vac.rw/api
         run: yarn build
 
   deploy:
@@ -51,30 +49,58 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Recreate private key from base64
+      - name: Recreate private key from base64 (ed25519)
+        shell: bash
         run: |
+          set -euo pipefail
           mkdir -p ~/.ssh
+
+          # Decode private key stored in secrets.SSH_KEY_BASE64
           printf '%s' "${{ secrets.SSH_KEY_BASE64 }}" | tr -d '\r\n ' | base64 -d > ~/.ssh/id_ed25519
-           chmod 600 ~/.ssh/id_ed25519
-           chmod 700 ~/.ssh
-           echo "Runner key fingerprint:"
-           ssh-keygen -lf ~/.ssh/id_ed25519
+
+          chmod 600 ~/.ssh/id_ed25519
+          chmod 700 ~/.ssh
+
+          echo "Runner key fingerprint:"
+          ssh-keygen -lf ~/.ssh/id_ed25519
 
       - name: Add server to known_hosts
+        shell: bash
         run: |
-          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+          set -euo pipefail
+          ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts
 
-      - name: Test SSH connectivity (no command)
+      - name: Test SSH connectivity
+        shell: bash
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_IP:   ${{ secrets.SERVER_IP }}
         run: |
-          echo "Target is: $SERVER_USER@$SERVER_IP"
-          ssh -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519 "$SERVER_USER@$SERVER_IP" 'echo "SSH handshake OK"'
+          set -euo pipefail
+          echo "Target is: ${SERVER_USER}@${SERVER_IP}"
+
+          ssh \
+            -o BatchMode=yes \
+            -o PreferredAuthentications=publickey \
+            -o PasswordAuthentication=no \
+            -o IdentitiesOnly=yes \
+            -i ~/.ssh/id_ed25519 \
+            "${SERVER_USER}@${SERVER_IP}" \
+            'whoami && hostname && echo "SSH handshake OK"'
 
       - name: Run remote deploy script
+        shell: bash
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_IP:   ${{ secrets.SERVER_IP }}
         run: |
-          ssh -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519 "$SERVER_USER@$SERVER_IP" 'bash ~/vacrw/deploy.sh'
+          set -euo pipefail
+
+          ssh \
+            -o BatchMode=yes \
+            -o PreferredAuthentications=publickey \
+            -o PasswordAuthentication=no \
+            -o IdentitiesOnly=yes \
+            -i ~/.ssh/id_ed25519 \
+            "${SERVER_USER}@${SERVER_IP}" \
+            'bash ~/vacrw/deploy.sh'
