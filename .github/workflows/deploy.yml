@@ -54,9 +54,11 @@ jobs:
       - name: Recreate private key from base64
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY_BASE64 }}" | base64 -d > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          chmod 700 ~/.ssh
+          printf '%s' "${{ secrets.SSH_KEY_BASE64 }}" | tr -d '\r\n ' | base64 -d > ~/.ssh/id_ed25519
+           chmod 600 ~/.ssh/id_ed25519
+           chmod 700 ~/.ssh
+           echo "Runner key fingerprint:"
+           ssh-keygen -lf ~/.ssh/id_ed25519
 
       - name: Add server to known_hosts
         run: |
@@ -67,6 +69,7 @@ jobs:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_IP:   ${{ secrets.SERVER_IP }}
         run: |
+          echo "Target is: $SERVER_USER@$SERVER_IP"
           ssh -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519 "$SERVER_USER@$SERVER_IP" 'echo "SSH handshake OK"'
 
       - name: Run remote deploy script
