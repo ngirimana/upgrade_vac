@@ -78,15 +78,18 @@ jobs:
             'whoami && hostname && echo "SSH handshake OK"'
 
       - name: Run remote deploy script (password)
+        shell: bash
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_IP:   ${{ secrets.SERVER_IP }}
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
-          sshpass -p "${SERVER_PASSWORD}" ssh \
+          set -euo pipefail
+
+          sshpass -p "$SERVER_PASSWORD" ssh \
             -o PreferredAuthentications=password \
             -o PubkeyAuthentication=no \
             -o PasswordAuthentication=yes \
             -o StrictHostKeyChecking=yes \
-            "${SERVER_USER}@${SERVER_IP}" \
-            'bash /home/app/vacrw/deploy.sh''
+            "$SERVER_USER@$SERVER_IP" \
+            "bash /home/app/vacrw/deploy.sh"
