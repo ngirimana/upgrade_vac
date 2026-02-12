@@ -20,7 +20,7 @@ echo ">>> Installing dependencies..."
 yarn install 
 
 echo ">>> Building Next.js..."
-yarn build
+NODE_OPTIONS="--max-old-space-size=2048" yarn build
 
 echo ">>> Reloading PM2..."
 if pm2 describe "$APP_NAME" >/dev/null 2>&1; then
