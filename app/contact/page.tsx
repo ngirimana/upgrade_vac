@@ -224,7 +224,7 @@ export default function Home() {
                   <div>
                     <h4 className="font-medium text-secondary">LinkedIn</h4>
                     <a
-                      href="https://www.linkedin.com/in/your-profile"
+                      href="https://www.linkedin.com/company/vac-rwanda/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-secondary/70 hover:underline"

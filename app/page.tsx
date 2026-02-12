@@ -1,4 +1,5 @@
 "use client";
+import Script from "next/script";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -32,6 +33,33 @@ import { Button } from "@/components/ui/button";
 export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
+      <Script
+        id="structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Veritas Analytics & Consultant",
+            "alternateName": "VAC",
+            "url": "https://vac.rw",
+            "logo": "https://vac.rw/logo.png",
+            "sameAs": [
+              "https://twitter.com/vac_rwanda", // Placeholder for Twitter
+              "https://www.linkedin.com/company/vac-rwanda/"
+            ],
+            "description": "Premier consulting firm specializing in data analytics, business intelligence, and data engineering.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "RW"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer service"
+            }
+          })
+        }}
+      />
       {/* Hero Section */}
       <section className="relative bg-primary/10">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 z-0" />
